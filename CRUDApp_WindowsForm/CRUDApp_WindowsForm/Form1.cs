@@ -53,14 +53,12 @@ namespace CRUDApp_WindowsForm
             DataGridViewCellCollection elements = src[0].Cells;
             DBManager dbm = new DBManager();
             string tbl_name = "Shohin";
-            DataGridViewColumnCollection cols = dataGridView_Shohin.Columns;
+            string shohin_mei       = elements[1].Value.ToString();
+            string shohin_bunrui    = elements[2].Value.ToString();
+            int hanbai_tanka        = int.Parse(elements[3].Value.ToString());
+            int shiire_tanka        = int.Parse(elements[4].Value.ToString());
             string selected_id = elements[0].Value.ToString();
-            for (int i = 1; i < elements.Count; i++)
-            {
-                object element = elements[i].Value;
-                string col_name = cols[i].Name.ToString();
-                dbm.Update(tbl_name, col_name, element, selected_id);
-            }
+            dbm.Update(tbl_name, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, selected_id);
             this.ViewBtn_Click(sender, e);
         }
     }

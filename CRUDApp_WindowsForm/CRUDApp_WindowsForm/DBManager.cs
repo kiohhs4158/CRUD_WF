@@ -63,11 +63,14 @@ namespace CRUDApp_WindowsForm
             Execute(sql);
         }
 
-        public void Update(string tbl_name, string col_name, object element, string shohin_id)
+        public void Update(string tbl_name, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka, string shohin_id)
         {
-            string sql = $"UPDATE {tbl_name} SET {col_name} = '{element}' WHERE shohin_id = '{shohin_id}'";
+            DateTime dt = DateTime.Now;
+            string torokubi = dt.ToString("yyyy-MM-dd");
+            string sql = $"UPDATE {tbl_name} " +
+                         $"SET shohin_mei = '{shohin_mei}', shohin_bunrui = '{shohin_bunrui}', hanbai_tanka = {hanbai_tanka}, shiire_tanka = {shiire_tanka}, torokubi = '{torokubi}'" +
+                         $"WHERE shohin_id = '{shohin_id}'";
             Execute(sql);
         }
-
     }
 }
