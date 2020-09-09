@@ -20,16 +20,16 @@ namespace CRUDApp_WindowsForm
             cntstr = ConfigurationManager.ConnectionStrings["sqlsrv"].ConnectionString;
         }
         /// <summary>
-        /// データの表示
+        /// データセットの作成
         /// </summary>
         /// <param name="sql">クエリー</param>
         public DataSet View(string sql)
         {
             using (SqlConnection connection = new SqlConnection(cntstr))
             {
-                DataSet dataset = new DataSet();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = new SqlCommand(sql, connection);
+                DataSet dataset         = new DataSet();
+                SqlDataAdapter adapter  = new SqlDataAdapter();
+                adapter.SelectCommand   = new SqlCommand(sql, connection);
                 adapter.Fill(dataset);
                 return dataset;
             }
@@ -44,32 +44,73 @@ namespace CRUDApp_WindowsForm
             {
                 using (SqlConnection connection = new SqlConnection(cntstr))
                 {
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    connection.Open();
+                    using (SqlTransaction transaction = connection.BeginTransaction())
                     {
-                        connection.Open();
-                        command.ExecuteNonQuery();
+                        try
+                        {
+                            using (SqlCommand command = new SqlCommand(sql, connection, transaction))
+                            {
+                                command.ExecuteNonQuery();
+                                transaction.Commit();
+                            }
+                        }
+                        catch (SqlException)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 throw;
             }
         }
-
-        public void Delete(string tbl_name, string shohin_id)
-        {
-            string sql = $"DELETE FROM {tbl_name} WHERE shohin_id = '{shohin_id}'";
-            Execute(sql);
-        }
-
-        public void Update(string tbl_name, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka, string shohin_id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tbl_name"></param>
+        /// <param name="shohin_id"></param>
+        /// <param name="shohin_mei"></param>
+        /// <param name="shohin_bunrui"></param>
+        /// <param name="hanbai_tanka"></param>
+        /// <param name="shiire_tanka"></param>
+        public void Insert(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka)
         {
             DateTime dt = DateTime.Now;
             string torokubi = dt.ToString("yyyy-MM-dd");
-            string sql = $"UPDATE {tbl_name} " +
-                         $"SET shohin_mei = '{shohin_mei}', shohin_bunrui = '{shohin_bunrui}', hanbai_tanka = {hanbai_tanka}, shiire_tanka = {shiire_tanka}, torokubi = '{torokubi}'" +
-                         $"WHERE shohin_id = '{shohin_id}'";
+            string sql = $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
+                         + $"VALUES ('{shohin_id}', '{shohin_mei}', '{shohin_bunrui}', {hanbai_tanka}, {shiire_tanka}, '{torokubi}')";
+            Execute(sql);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tbl_name"></param>
+        /// <param name="shohin_mei"></param>
+        /// <param name="shohin_bunrui"></param>
+        /// <param name="hanbai_tanka"></param>
+        /// <param name="shiire_tanka"></param>
+        /// <param name="shohin_id"></param>
+        public void Update(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka)
+        {
+            DateTime dt     = DateTime.Now;
+            string torokubi = dt.ToString("yyyy-MM-dd");
+            string sql = $"UPDATE {tbl_name} "
+                         + $"SET shohin_mei = '{shohin_mei}', shohin_bunrui = '{shohin_bunrui}', hanbai_tanka = {hanbai_tanka}, shiire_tanka = {shiire_tanka}, torokubi = '{torokubi}'"
+                         + $"WHERE shohin_id = '{shohin_id}'";
+            Execute(sql);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tbl_name"></param>
+        /// <param name="shohin_id"></param>
+        public void Delete(string tbl_name, string shohin_id)
+        {
+            string sql = $"DELETE FROM {tbl_name} WHERE shohin_id = '{shohin_id}'";
             Execute(sql);
         }
     }

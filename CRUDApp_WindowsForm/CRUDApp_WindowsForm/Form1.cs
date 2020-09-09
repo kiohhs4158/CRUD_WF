@@ -20,7 +20,11 @@ namespace CRUDApp_WindowsForm
         private void CRUDForm_Load(object sender, EventArgs e)
         {
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewBtn_Click(object sender, EventArgs e)
         {
             DBManager dbm = new DBManager();
@@ -28,38 +32,61 @@ namespace CRUDApp_WindowsForm
             DataSet ds = dbm.View(sql);
             this.dataGridView_Shohin.DataSource = ds.Tables[0];
         }
-
-        private void DeleteBtn_Click(object sender, EventArgs e)
-        {
-            DataGridViewSelectedRowCollection src = dataGridView_Shohin.SelectedRows;
-
-            DBManager dbm = new DBManager();
-            string tbl_name = "Shohin";
-            string selected_id = src[0].Cells[0].Value.ToString();
-            dbm.Delete(tbl_name, selected_id);
-
-            dataGridView_Shohin.Rows.Remove(src[0]);
-            this.ViewBtn_Click(sender, e);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InsertBtn_Click(object sender, EventArgs e)
         {
-
+            InsertForm iform = new InsertForm();
+            iform.Show();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection src = dataGridView_Shohin.SelectedRows;
-            DataGridViewCellCollection elements = src[0].Cells;
-            DBManager dbm = new DBManager();
-            string tbl_name = "Shohin";
-            string shohin_mei       = elements[1].Value.ToString();
-            string shohin_bunrui    = elements[2].Value.ToString();
-            int hanbai_tanka        = int.Parse(elements[3].Value.ToString());
-            int shiire_tanka        = int.Parse(elements[4].Value.ToString());
-            string selected_id = elements[0].Value.ToString();
-            dbm.Update(tbl_name, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, selected_id);
-            this.ViewBtn_Click(sender, e);
+            if (src.Count > 0)
+            {
+                DBManager dbm = new DBManager();
+                string tbl_name = "Shohin";
+                for (int i = src.Count - 1; i >= 0; i--)
+                {
+                    DataGridViewCellCollection elements = src[i].Cells;
+                    string selected_id = elements[0].Value.ToString();
+                    string shohin_mei = elements[1].Value.ToString();
+                    string shohin_bunrui = elements[2].Value.ToString();
+                    int hanbai_tanka = int.Parse(elements[3].Value.ToString());
+                    int shiire_tanka = int.Parse(elements[4].Value.ToString());
+                    dbm.Update(tbl_name, selected_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka);
+                }
+                this.ViewBtn_Click(sender, e);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection src = dataGridView_Shohin.SelectedRows;
+            if (src.Count > 0)
+            {
+                DBManager dbm = new DBManager();
+                string tbl_name = "Shohin";
+                for (int i = src.Count - 1; i >= 0; i--)
+                {
+                    string selected_id = src[i].Cells[0].Value.ToString();
+                    dbm.Delete(tbl_name, selected_id);
+                    dataGridView_Shohin.Rows.Remove(src[i]);
+                }
+                this.ViewBtn_Click(sender, e);
+            }
         }
     }
 }
