@@ -69,7 +69,7 @@ namespace CRUDApp_WindowsForm
             }
         }
         /// <summary>
-        /// 
+        /// Insert
         /// </summary>
         /// <param name="tbl_name"></param>
         /// <param name="shohin_id"></param>
@@ -77,7 +77,7 @@ namespace CRUDApp_WindowsForm
         /// <param name="shohin_bunrui"></param>
         /// <param name="hanbai_tanka"></param>
         /// <param name="shiire_tanka"></param>
-        public void Insert(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka)
+        public void Insert(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, object hanbai_tanka, object shiire_tanka)
         {
             DateTime dt = DateTime.Now;
             string torokubi = dt.ToString("yyyy-MM-dd");
@@ -86,7 +86,7 @@ namespace CRUDApp_WindowsForm
             Execute(sql);
         }
         /// <summary>
-        /// 
+        /// Update
         /// </summary>
         /// <param name="tbl_name"></param>
         /// <param name="shohin_mei"></param>
@@ -94,7 +94,7 @@ namespace CRUDApp_WindowsForm
         /// <param name="hanbai_tanka"></param>
         /// <param name="shiire_tanka"></param>
         /// <param name="shohin_id"></param>
-        public void Update(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, int hanbai_tanka, int shiire_tanka)
+        public void Update(string tbl_name, string shohin_id, string shohin_mei, string shohin_bunrui, object hanbai_tanka, object shiire_tanka)
         {
             DateTime dt     = DateTime.Now;
             string torokubi = dt.ToString("yyyy-MM-dd");
@@ -104,7 +104,7 @@ namespace CRUDApp_WindowsForm
             Execute(sql);
         }
         /// <summary>
-        /// 
+        /// Delete
         /// </summary>
         /// <param name="tbl_name"></param>
         /// <param name="shohin_id"></param>
@@ -112,6 +112,29 @@ namespace CRUDApp_WindowsForm
         {
             string sql = $"DELETE FROM {tbl_name} WHERE shohin_id = '{shohin_id}'";
             Execute(sql);
+        }
+        public static object CheckEmpty(string textbox)
+        {
+            if (string.IsNullOrEmpty(textbox))
+            {
+                return "NULL";
+            }
+            else
+            {
+                return int.Parse(textbox);
+            }
+        }
+        public static object CheckDBNull(object element)
+        {
+            if (element.GetType().Name == "DBNull")
+            {
+                return "NULL";
+            }
+            else
+            {
+                return int.Parse(element.ToString());
+            }
+            
         }
     }
 }
