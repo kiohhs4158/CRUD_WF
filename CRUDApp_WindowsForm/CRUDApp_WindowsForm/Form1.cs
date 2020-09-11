@@ -28,17 +28,15 @@ namespace CRUDApp_WindowsForm
         private void ViewBtn_Click(object sender, EventArgs e)
         {
             DBManager dbm = new DBManager();
-            string sql = "SELECT * FROM Shohin";
-            DataSet ds = dbm.View(sql);
-            DataTable dt_shohin = ds.Tables[0];
+            DataTable dt_shohin = dbm.View(0);
             dt_shohin.Columns["shohin_id"].ReadOnly = true;
-            dt_shohin.Columns["torokubi"].ReadOnly = true;
-            dt_shohin.Columns["shohin_id"].ColumnName = "商品ID";
-            dt_shohin.Columns["shohin_mei"].ColumnName = "商品名";
-            dt_shohin.Columns["shohin_bunrui"].ColumnName = "商品分類";
-            dt_shohin.Columns["hanbai_tanka"].ColumnName = "販売単価";
-            dt_shohin.Columns["shiire_tanka"].ColumnName = "仕入単価";
-            dt_shohin.Columns["torokubi"].ColumnName = "登録日";
+            dt_shohin.Columns["torokubi"].ReadOnly  = true;
+            dt_shohin.Columns["shohin_id"].ColumnName       = "商品ID";
+            dt_shohin.Columns["shohin_mei"].ColumnName      = "商品名";
+            dt_shohin.Columns["shohin_bunrui"].ColumnName   = "商品分類";
+            dt_shohin.Columns["hanbai_tanka"].ColumnName    = "販売単価";
+            dt_shohin.Columns["shiire_tanka"].ColumnName    = "仕入単価";
+            dt_shohin.Columns["torokubi"].ColumnName        = "登録日";
             this.dataGridView_Shohin.DataSource = dt_shohin;
         }
         /// <summary>
@@ -49,7 +47,8 @@ namespace CRUDApp_WindowsForm
         private void InsertBtn_Click(object sender, EventArgs e)
         {
             InsertForm iform = new InsertForm();
-            iform.Show();
+            iform.ShowDialog();
+            this.ViewBtn_Click(sender, e);
         }
         /// <summary>
         /// 
@@ -66,11 +65,11 @@ namespace CRUDApp_WindowsForm
                 for (int i = src.Count - 1; i >= 0; i--)
                 {
                     DataGridViewCellCollection elements = src[i].Cells;
-                    string selected_id = elements[0].Value.ToString();
-                    string shohin_mei = elements[1].Value.ToString();
-                    string shohin_bunrui = elements[2].Value.ToString();
-                    object hanbai_tanka = DBManager.CheckDBNull(elements[3].Value);
-                    object shiire_tanka = DBManager.CheckDBNull(elements[4].Value);
+                    string selected_id      = elements[0].Value.ToString();
+                    string shohin_mei       = elements[1].Value.ToString();
+                    string shohin_bunrui    = elements[2].Value.ToString();
+                    object hanbai_tanka     = DBManager.CheckDBNull(elements[3].Value);
+                    object shiire_tanka     = DBManager.CheckDBNull(elements[4].Value);
                     dbm.Update(tbl_name, selected_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka);
                 }
                 this.ViewBtn_Click(sender, e);
