@@ -17,9 +17,7 @@ namespace CRUDApp_WindowsForm
             InitializeComponent();
         }
 
-        private void CRUDForm_Load(object sender, EventArgs e)
-        {
-        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +36,7 @@ namespace CRUDApp_WindowsForm
             dt_shohin.Columns["shiire_tanka"].ColumnName    = "仕入単価";
             dt_shohin.Columns["torokubi"].ColumnName        = "登録日";
             this.dataGridView_Shohin.DataSource = dt_shohin;
+            this.dataGridView_Shohin.AutoResizeColumns();
         }
         /// <summary>
         /// 
@@ -96,6 +95,32 @@ namespace CRUDApp_WindowsForm
                 }
                 this.ViewBtn_Click(sender, e);
             }
+        }
+
+        private void csvBtn1_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = this.opencsvFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                DBManager dbm = new DBManager();
+                string tbl_name = "Shohin";
+                string filepath = this.opencsvFileDialog.FileName;
+                string encoding_name = "UTF-8";
+                object[][] csv_2d_array = CSVManager.Loadcsv_2D(filepath, encoding_name);
+                dbm.Insert_2d_csv(tbl_name, csv_2d_array);
+                this.ViewBtn_Click(sender, e);
+            }
+        }
+
+        private void csvBtn2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
         }
     }
 }

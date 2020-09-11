@@ -25,7 +25,7 @@ namespace CRUDApp_WindowsForm
         /// <param name="sql">クエリー</param>
         private DataSet GetDataSet(string sql)
         {
-            using (SqlConnection connection = new SqlConnection(cntstr))
+            using (SqlConnection connection = new SqlConnection(this.cntstr))
             {
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -113,19 +113,49 @@ namespace CRUDApp_WindowsForm
         public void Insert(string tbl_name, string shohin_mei, string shohin_bunrui, object hanbai_tanka, object shiire_tanka)
         {
             List<object> shohin_ids = this.GetColumnList(0, "shohin_id");
-            string shohin_id = this.AutoIncrementShohinID(shohin_ids);
+            string shohin_id = this.AutoIncrementStringID(shohin_ids);
             DateTime dt = DateTime.Now;
             string torokubi = dt.ToString("yyyy-MM-dd");
             string sql = $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
                          + $"VALUES ('{shohin_id}', '{shohin_mei}', '{shohin_bunrui}', {hanbai_tanka}, {shiire_tanka}, '{torokubi}')";
-            Execute(sql);
+            this.Execute(sql);
         }
-
-        private string AutoIncrementShohinID(List<object> col_element_list)
+        public void Insert_2d_csv(string tbl_name, object[][] csv_2d)
+        {
+            List<object> shohin_ids = this.GetColumnList(0, "shohin_id");
+            int insert_id = this.AutoIncrementIntID(shohin_ids);
+            DateTime dt = DateTime.Now;
+            string torokubi = dt.ToString("yyyy-MM-dd");
+            string sql = "";
+            for (int i = 0; i < csv_2d.Length; i++)
+            {
+                int shohin_int_id = insert_id + i;
+                string shohin_id = String.Format("{0:D4}", shohin_int_id);
+                sql += $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
+                        + $"VALUES ('{shohin_id}', '{csv_2d[i][0]}', '{csv_2d[i][1]}', {int.Parse(csv_2d[i][2].ToString())}, {int.Parse(csv_2d[i][3].ToString())}, '{torokubi}')";
+            }
+            this.Execute(sql);
+        }
+        /// <summary>
+        /// 商品ID自動採番(String.Format)
+        /// </summary>
+        /// <param name="col_element_list"></param>
+        /// <returns></returns>
+        private string AutoIncrementStringID(List<object> col_element_list)
         {
             int last_id = int.Parse(col_element_list.Last().ToString());
             int insert_id = last_id + 1;
             return String.Format("{0:D4}", insert_id);
+        }
+        /// <summary>
+        /// 商品ID自動採番(Int)
+        /// </summary>
+        /// <param name="col_element_list"></param>
+        /// <returns></returns>
+        private int AutoIncrementIntID(List<object> col_element_list)
+        {
+            int last_id = int.Parse(col_element_list.Last().ToString());
+            return last_id + 1;
         }
         /// <summary>
         /// Update
@@ -143,7 +173,7 @@ namespace CRUDApp_WindowsForm
             string sql = $"UPDATE {tbl_name} "
                          + $"SET shohin_mei = '{shohin_mei}', shohin_bunrui = '{shohin_bunrui}', hanbai_tanka = {hanbai_tanka}, shiire_tanka = {shiire_tanka}, torokubi = '{torokubi}'"
                          + $"WHERE shohin_id = '{shohin_id}'";
-            Execute(sql);
+            this.Execute(sql);
         }
         /// <summary>
         /// Delete
@@ -153,7 +183,7 @@ namespace CRUDApp_WindowsForm
         public void Delete(string tbl_name, string shohin_id)
         {
             string sql = $"DELETE FROM {tbl_name} WHERE shohin_id = '{shohin_id}'";
-            Execute(sql);
+            this.Execute(sql);
         }
         /// <summary>
         /// 空文字判定（販売単価、仕入単価）
