@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_Shohin = new System.Windows.Forms.DataGridView();
             this.ViewBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
@@ -40,6 +40,7 @@
             this.csvBtn2 = new System.Windows.Forms.Button();
             this.csvBtn1 = new System.Windows.Forms.Button();
             this.opencsvFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.csvBtn3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Shohin)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,34 +50,34 @@
             this.dataGridView_Shohin.AllowUserToOrderColumns = true;
             this.dataGridView_Shohin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Shohin.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Shohin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Shohin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Shohin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_Shohin.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_Shohin.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_Shohin.Location = new System.Drawing.Point(11, 51);
             this.dataGridView_Shohin.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView_Shohin.Name = "dataGridView_Shohin";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Shohin.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Shohin.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Shohin.RowHeadersWidth = 62;
             this.dataGridView_Shohin.RowTemplate.Height = 27;
             this.dataGridView_Shohin.Size = new System.Drawing.Size(565, 267);
@@ -148,9 +149,9 @@
             this.csvBtn2.Location = new System.Drawing.Point(11, 420);
             this.csvBtn2.Margin = new System.Windows.Forms.Padding(2);
             this.csvBtn2.Name = "csvBtn2";
-            this.csvBtn2.Size = new System.Drawing.Size(226, 30);
+            this.csvBtn2.Size = new System.Drawing.Size(278, 30);
             this.csvBtn2.TabIndex = 7;
-            this.csvBtn2.Text = "csvから追加（２）";
+            this.csvBtn2.Text = "csvから追加（BULK INSERT）";
             this.csvBtn2.UseVisualStyleBackColor = true;
             this.csvBtn2.Click += new System.EventHandler(this.csvBtn2_Click);
             // 
@@ -160,9 +161,9 @@
             this.csvBtn1.Location = new System.Drawing.Point(11, 386);
             this.csvBtn1.Margin = new System.Windows.Forms.Padding(2);
             this.csvBtn1.Name = "csvBtn1";
-            this.csvBtn1.Size = new System.Drawing.Size(226, 30);
+            this.csvBtn1.Size = new System.Drawing.Size(278, 30);
             this.csvBtn1.TabIndex = 8;
-            this.csvBtn1.Text = "csvから追加（１）";
+            this.csvBtn1.Text = "csvから追加（カンマ、改行を反映できない）";
             this.csvBtn1.UseVisualStyleBackColor = true;
             this.csvBtn1.Click += new System.EventHandler(this.csvBtn1_Click);
             // 
@@ -170,11 +171,24 @@
             // 
             this.opencsvFileDialog.Filter = "csv files(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
             // 
+            // csvBtn3
+            // 
+            this.csvBtn3.Font = new System.Drawing.Font("Meiryo UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.csvBtn3.Location = new System.Drawing.Point(305, 386);
+            this.csvBtn3.Margin = new System.Windows.Forms.Padding(2);
+            this.csvBtn3.Name = "csvBtn3";
+            this.csvBtn3.Size = new System.Drawing.Size(271, 30);
+            this.csvBtn3.TabIndex = 9;
+            this.csvBtn3.Text = "csvから追加（CsvHelper）";
+            this.csvBtn3.UseVisualStyleBackColor = true;
+            this.csvBtn3.Click += new System.EventHandler(this.csvBtn3_Click);
+            // 
             // CRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 501);
+            this.Controls.Add(this.csvBtn3);
             this.Controls.Add(this.csvBtn1);
             this.Controls.Add(this.csvBtn2);
             this.Controls.Add(this.CloseBtn);
@@ -201,6 +215,7 @@
         private System.Windows.Forms.Button csvBtn2;
         private System.Windows.Forms.Button csvBtn1;
         private System.Windows.Forms.OpenFileDialog opencsvFileDialog;
+        private System.Windows.Forms.Button csvBtn3;
     }
 }
 

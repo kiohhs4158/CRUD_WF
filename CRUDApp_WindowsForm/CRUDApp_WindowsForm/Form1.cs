@@ -95,7 +95,7 @@ namespace CRUDApp_WindowsForm
             }
         }
         /// <summary>
-        /// csv(1)ボタン
+        /// csv(""内の,、空白、改行を反映できない)ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -107,14 +107,14 @@ namespace CRUDApp_WindowsForm
                 DBManager dbm = new DBManager();
                 string tbl_name = "Shohin";
                 string filepath = this.opencsvFileDialog.FileName;
-                string encoding_name = "UTF-8";
-                string[][] csv_2d_array = CSVManager.Loadcsv_2D(filepath, encoding_name);
+                string encoding_info = "UTF-8";
+                string[][] csv_2d_array = CSVManager.Loadcsv_2D(filepath, encoding_info);
                 dbm.Insert_csv(tbl_name, csv_2d_array);
                 this.ViewBtn_Click(sender, e);
             }
         }
         /// <summary>
-        /// csv(2)ボタン
+        /// csv(BULK INSERT)ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -132,6 +132,25 @@ namespace CRUDApp_WindowsForm
             }
         }
         /// <summary>
+        /// csv(CsvHelper)ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void csvBtn3_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = this.opencsvFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                DBManager dbm = new DBManager();
+                string tbl_name = "Shohin";
+                string filepath = this.opencsvFileDialog.FileName;
+                string encoding_info = "SHIFT_JIS";
+                List<CSVManager.Shohin> elements = CSVManager.GetRecords<CSVManager.Shohin, CSVManager.ShohinMapper>(filepath, encoding_info);
+                dbm.InsertwithCsvHelper(tbl_name, elements);
+                this.ViewBtn_Click(sender, e);
+            }
+        }
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -141,5 +160,6 @@ namespace CRUDApp_WindowsForm
             this.Close();
             this.Dispose();
         }
+
     }
 }
