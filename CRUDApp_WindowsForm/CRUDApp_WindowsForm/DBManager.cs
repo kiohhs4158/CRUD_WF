@@ -164,7 +164,7 @@ namespace CRUDApp_WindowsForm
                 int shohin_int_id = insert_id + cnt;
                 string shohin_id = String.Format("{0:D4}", shohin_int_id);
                 sql += $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
-                       + $"VALUES ('{shohin_id}', '{element.Name}', '{element.Group}', {element.Price}, {element.Cost}, '{element.Date.ToString("yyyy-MM-dd")}')";
+                       + $"VALUES ('{shohin_id}', '{element.Name}', '{element.Group}', {element.Price}, {element.Cost}, '{element.Date?.ToString("yyyy-MM-dd")}')";
                 cnt++;
             }
             this.Execute(sql);
