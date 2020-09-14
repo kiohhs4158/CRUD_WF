@@ -10,21 +10,15 @@ namespace CRUDApp_WindowsForm
 {
     class CSVManager
     {
-        /*
-        public static string[] Loadcsv_1D(string filepath, string encoding_name)
-        {
-            
-        }
-        */
         /// <summary>
         /// csvファイルから２次元配列を取得（２行目から）
         /// </summary>
         /// <param name="filepath"></param>
         /// <param name="encoding_name"></param>
         /// <returns></returns>
-        public static object[][] Loadcsv_2D(string filepath, string encoding_name)
+        public static string[][] Loadcsv_2D(string filepath, string encoding_name)
         {
-            List<object[]> csv_list = new List<object[]>();
+            List<string[]> csv_list = new List<string[]>();
             using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(encoding_name)))
             {
                 int line = 0;

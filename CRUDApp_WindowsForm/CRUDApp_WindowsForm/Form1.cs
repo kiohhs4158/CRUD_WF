@@ -16,10 +16,8 @@ namespace CRUDApp_WindowsForm
         {
             InitializeComponent();
         }
-
-
         /// <summary>
-        /// 
+        /// 表示ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -39,7 +37,7 @@ namespace CRUDApp_WindowsForm
             this.dataGridView_Shohin.AutoResizeColumns();
         }
         /// <summary>
-        /// 
+        /// 追加ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,7 +48,7 @@ namespace CRUDApp_WindowsForm
             this.ViewBtn_Click(sender, e);
         }
         /// <summary>
-        /// 
+        /// 編集ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -75,7 +73,7 @@ namespace CRUDApp_WindowsForm
             }
         }
         /// <summary>
-        /// 
+        /// 削除ボタン
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -96,7 +94,11 @@ namespace CRUDApp_WindowsForm
                 this.ViewBtn_Click(sender, e);
             }
         }
-
+        /// <summary>
+        /// csv(1)ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void csvBtn1_Click(object sender, EventArgs e)
         {
             DialogResult dr = this.opencsvFileDialog.ShowDialog();
@@ -106,17 +108,34 @@ namespace CRUDApp_WindowsForm
                 string tbl_name = "Shohin";
                 string filepath = this.opencsvFileDialog.FileName;
                 string encoding_name = "UTF-8";
-                object[][] csv_2d_array = CSVManager.Loadcsv_2D(filepath, encoding_name);
-                dbm.Insert_2d_csv(tbl_name, csv_2d_array);
+                string[][] csv_2d_array = CSVManager.Loadcsv_2D(filepath, encoding_name);
+                dbm.Insert_csv(tbl_name, csv_2d_array);
                 this.ViewBtn_Click(sender, e);
             }
         }
-
+        /// <summary>
+        /// csv(2)ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void csvBtn2_Click(object sender, EventArgs e)
         {
-
+            DialogResult dr = this.opencsvFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                DBManager dbm = new DBManager();
+                string tbl_name = "Shohin";
+                string filepath = this.opencsvFileDialog.FileName;
+                int first_row = 2;
+                dbm.BulkInsert(tbl_name, filepath, first_row);
+                this.ViewBtn_Click(sender, e);
+            }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();

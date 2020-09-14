@@ -120,7 +120,12 @@ namespace CRUDApp_WindowsForm
                          + $"VALUES ('{shohin_id}', '{shohin_mei}', '{shohin_bunrui}', {hanbai_tanka}, {shiire_tanka}, '{torokubi}')";
             this.Execute(sql);
         }
-        public void Insert_2d_csv(string tbl_name, object[][] csv_2d)
+        /// <summary>
+        /// csvから追加
+        /// </summary>
+        /// <param name="tbl_name"></param>
+        /// <param name="csv_2d"></param>
+        public void Insert_csv(string tbl_name, string[][] csv_2d)
         {
             List<object> shohin_ids = this.GetColumnList(0, "shohin_id");
             int insert_id = this.AutoIncrementIntID(shohin_ids);
@@ -132,8 +137,19 @@ namespace CRUDApp_WindowsForm
                 int shohin_int_id = insert_id + i;
                 string shohin_id = String.Format("{0:D4}", shohin_int_id);
                 sql += $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
-                        + $"VALUES ('{shohin_id}', '{csv_2d[i][0]}', '{csv_2d[i][1]}', {int.Parse(csv_2d[i][2].ToString())}, {int.Parse(csv_2d[i][3].ToString())}, '{torokubi}')";
+                        + $"VALUES ('{shohin_id}', '{csv_2d[i][0]}', '{csv_2d[i][1]}', {int.Parse(csv_2d[i][2])}, {int.Parse(csv_2d[i][3])}, '{torokubi}')";
             }
+            this.Execute(sql);
+        }
+        /// <summary>
+        /// BULK INSERT
+        /// </summary>
+        /// <param name="tbl_name"></param>
+        /// <param name="filepath"></param>
+        /// <param name="first_row"></param>
+        public void BulkInsert(string tbl_name, string filepath, int first_row)
+        {
+            string sql = $"BULK INSERT {tbl_name} FROM '{filepath}' WITH (CODEPAGE = '65001', DATAFILETYPE = 'char', FIRSTROW = {first_row}, FIELDTERMINATOR = ',')";
             this.Execute(sql);
         }
         /// <summary>
