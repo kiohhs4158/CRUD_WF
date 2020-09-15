@@ -63,26 +63,24 @@ namespace CRUDApp_WindowsForm
         {
             public string Name { get; set; }
             public string Group { get; set; }
-            public Nullable<int> Price { get; set; }
-            public Nullable<int> Cost { get; set; }
-            public Nullable<DateTime> Date { get; set; }
+            public int Price { get; set; }
+            public int Cost { get; set; }
+            public DateTime Date { get; set; }
 
         }
         /// <summary>
-        /// 
+        /// Shohinマッピング用クラス
         /// </summary>
         public class ShohinMapper : CsvHelper.Configuration.ClassMap<Shohin>
         {
-            /// <summary>
-            /// Shohinマッピング用クラス
-            /// </summary>
+            DateTime default_date = new DateTime(9999, 12, 31);
             private ShohinMapper()
             {
-                Map(x => x.Name).Name("商品名");
-                Map(x => x.Group).Name("商品分類");
-                Map(x => x.Price).Name("販売単価");
-                Map(x => x.Cost).Name("仕入単価");
-                Map(x => x.Date).Name("登録日");
+                Map(x => x.Name).Name("商品名").Default("");
+                Map(x => x.Group).Name("商品分類").Default("");
+                Map(x => x.Price).Name("販売単価").Default(0);
+                Map(x => x.Cost).Name("仕入単価").Default(0);
+                Map(x => x.Date).Name("登録日").Default(default_date);
                 //csv入力フォーマットによってはTypeConverterOption.Format("yyyy-MM-dd")が必要
             }
         }

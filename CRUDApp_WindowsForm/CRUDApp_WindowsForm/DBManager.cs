@@ -158,13 +158,13 @@ namespace CRUDApp_WindowsForm
             List<object> shohin_ids = this.GetColumnList(0, "shohin_id");
             int insert_id = this.AutoIncrementIntID(shohin_ids);
             string sql = "";
-            int cnt = 1;
+            int cnt = 0;
             foreach (var element in elements)
             {
                 int shohin_int_id = insert_id + cnt;
                 string shohin_id = String.Format("{0:D4}", shohin_int_id);
                 sql += $"INSERT INTO {tbl_name} (shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)"
-                       + $"VALUES ('{shohin_id}', '{element.Name}', '{element.Group}', {element.Price}, {element.Cost}, '{element.Date?.ToString("yyyy-MM-dd")}')";
+                       + $"VALUES ('{shohin_id}', '{element.Name}', '{element.Group}', {element.Price}, {element.Cost}, '{element.Date.ToString("yyyy-MM-dd")}')";
                 cnt++;
             }
             this.Execute(sql);
